@@ -6,6 +6,8 @@ import 'dart:io';
 import 'package:stress_management_app/components/button.dart';
 
 class Home extends StatefulWidget {
+  const Home({super.key});
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -19,7 +21,7 @@ class _HomeState extends State<Home> {
   //List<Map<String, dynamic>> _output = [];
   final picker = ImagePicker(); //Allows picking image from galler or camera
 
-  //@override
+  @override
   void initState() {
     super.initState();
     loadModel();
@@ -106,49 +108,44 @@ class _HomeState extends State<Home> {
               children: [
                 const Text(
               'Manage your Stress with the Power of AI',
-              style: TextStyle(color: Color(0xffeeda28), fontSize: 28),
+              style: TextStyle(color: Color(0xffeeda28), fontSize: 28, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 6),
             const Text(
               'Help us Understand you better by taking a Clear Photo using your front Camera',
               style: TextStyle(
                 color: Color(0xffe99600),
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.normal,
                 fontSize: 18,
               ),
             ),
             const SizedBox(height: 40),
             Container(
-              color: Colors.green,
               child: _loading
-                  ? Container(
+                  ? SizedBox(
                       width: 500,
                       child: Column(
                         children: <Widget>[
                           Image.asset('assets/stress3.jpg'),
                         ],
                       ))
-                  : Container(
-                      child: Column(
-                        children: <Widget>[
-                          Image.file(_image),
-                          const SizedBox(height: 20),
-                          _output != null
-                              ? Text(
-                                  '${_output[0]['label']}',
-                                  style: const TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                )
-                              : Container(),
-                          const SizedBox(height: 10),
-                        ],
-                      ),
-                    ),
+                  : Column(
+                    children: <Widget>[
+                      Image.file(_image),
+                      const SizedBox(height: 20),
+                      Text(
+                              '${_output[0]['label']}',
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                      const SizedBox(height: 10),
+                    ],
+                  ),
             ),
               ],
             ),
             const SizedBox(height: 50,),
-            Container(
+            SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: <Widget>[
