@@ -1,11 +1,6 @@
-
-// ignore_for_file: unused_import, unnecessary_import, depend_on_referenced_packages
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stress_management_app/Home.dart';
-import 'package:stress_management_app/main.dart';
-import 'package:lottie/lottie.dart';
+import 'package:stress_management_app/screens/Home.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -36,14 +31,12 @@ class _MySplashState extends State <MySplash> {
               color: Color(0xffe99600),
             ),
           ),
-           
            SizedBox(height: 10),
-          
           Text(
             'feel the moment',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 10,
+              fontSize: 12,
               color: Color(0xffe99600),
             ),
           ),

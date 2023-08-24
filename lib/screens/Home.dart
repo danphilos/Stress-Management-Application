@@ -1,11 +1,9 @@
 
-// ignore: file_names
-// ignore_for_file: file_names, prefer_const_literals_to_create_immutables, prefer_const_constructors, duplicate_ignore, import_of_legacy_library_into_null_safe
-
 import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:stress_management_app/components/button.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,7 +11,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // ignore: prefer_final_fields
   bool _loading = true;
 
   //tflite varibles
@@ -98,21 +95,20 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff101010),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            SizedBox(height: 50),
+            const SizedBox(height: 40),
             Column(
               children: [
-                Text(
+                const Text(
               'Manage your Stress with the Power of AI',
               style: TextStyle(color: Color(0xffeeda28), fontSize: 28),
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             const Text(
               'Help us Understand you better by taking a Clear Photo using your front Camera',
               style: TextStyle(
@@ -121,7 +117,7 @@ class _HomeState extends State<Home> {
                 fontSize: 18,
               ),
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Container(
               color: Colors.green,
               child: _loading
@@ -135,18 +131,16 @@ class _HomeState extends State<Home> {
                   : Container(
                       child: Column(
                         children: <Widget>[
-                          Container(
-                            child: Image.file(_image),
-                          ),
-                          SizedBox(height: 20),
+                          Image.file(_image),
+                          const SizedBox(height: 20),
                           _output != null
                               ? Text(
                                   '${_output[0]['label']}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Colors.white, fontSize: 20),
                                 )
                               : Container(),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                         ],
                       ),
                     ),
@@ -158,37 +152,9 @@ class _HomeState extends State<Home> {
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: <Widget>[
-                    GestureDetector(
-                      onTap: pickCameraImage,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.center,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 17),
-                        decoration: BoxDecoration(
-                          color: Color(0xffe99600),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text('Capture',
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    GestureDetector(
-                      onTap: pickGalleryImage,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        alignment: Alignment.center,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 17),
-                        decoration: BoxDecoration(
-                          color: Color(0xffe99600),
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                        child: Text('Gallery',
-                            style: TextStyle(color: Colors.white)),
-                      ),
-                    ),
+                    CustomButton(onTap: pickCameraImage, text: "Capture"),
+                    const SizedBox(height: 12,),
+                    CustomButton(onTap: pickGalleryImage, text: "Gallery")
                   ],
                 ))
           ],
