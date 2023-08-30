@@ -4,20 +4,15 @@ import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:stress_management_app/components/button.dart';
-import 'package:get/get.dart';
-import 'package:stress_management_app/screens/manage_stress.dart';
-import 'package:stress_management_app/screens/meditation.dart';
-import 'package:stress_management_app/screens/therapist.dart';
-import 'package:stress_management_app/screens/sensations.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class ManageStressScreen extends StatefulWidget {
+  const ManageStressScreen({super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  _ManageStressScreenState createState() => _ManageStressScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _ManageStressScreenState extends State<ManageStressScreen> {
   bool _loading = true;
 
   //tflite varibles
@@ -99,42 +94,6 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 
-  void moveToManageStress() {
-    Get.off(
-      () => const ManageStressScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
-  }
-
-  void moveToMeditation() {
-    Get.off(
-      () => const MeditationScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
-  }
-
-  void moveToTherepist() {
-    Get.off(
-      () => const TherapistScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
-  }
-
-  void moveToSensation() {
-    Get.off(
-      () => const SensationsScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,15 +103,45 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const SizedBox(height: 30),
-            const Column(
+            const SizedBox(height: 40),
+            Column(
               children: [
-                Text(
-              'Are you an employee having stress at work. need someone to talk to?',
+                const Text(
+              'Manage your Stress with the Power of AI',
               style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 6),
-            SizedBox(height: 40),
+            const SizedBox(height: 6),
+            const Text(
+              'Help us Understand you better by taking a Clear Photo using your front Camera',
+              style: TextStyle(
+                color: Colors.white70,
+                fontWeight: FontWeight.normal,
+                fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 40),
+            Container(
+              child: _loading
+                  ? SizedBox(
+                      width: 500,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset('assets/stress3.jpg'),
+                        ],
+                      ))
+                  : Column(
+                    children: <Widget>[
+                      Image.file(_image),
+                      const SizedBox(height: 20),
+                      Text(
+                              '${_output[0]['label']}',
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                      const SizedBox(height: 10),
+                    ],
+                  ),
+            ),
               ],
             ),
             const SizedBox(height: 50,),
@@ -160,13 +149,9 @@ class _HomeState extends State<Home> {
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: <Widget>[
-                    CustomButton(onTap: moveToManageStress, text: "Manage Stress"),
+                    CustomButton(onTap: pickCameraImage, text: "Capture"),
                     const SizedBox(height: 12,),
-                    CustomButton(onTap: moveToTherepist, text: "Talk to a Therapist"),
-                    const SizedBox(height: 12,),
-                    CustomButton(onTap: moveToMeditation, text: "Meditation"),
-                    const SizedBox(height: 12,),
-                    CustomButton(onTap: moveToSensation, text: "Sensations")
+                    CustomButton(onTap: pickGalleryImage, text: "Gallery")
                   ],
                 ))
           ],
