@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:stress_management_app/screens/settings.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -9,15 +10,17 @@ import 'package:stress_management_app/screens/manage_stress.dart';
 import 'package:stress_management_app/screens/meditation.dart';
 import 'package:stress_management_app/screens/therapist.dart';
 import 'package:stress_management_app/screens/sensations.dart';
+import 'package:stress_management_app/screens/home.dart';
+import 'package:stress_management_app/screens/profile.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Wrapper extends StatefulWidget {
+  const Wrapper({super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  _WrapperState createState() => _WrapperState();
 }
 
-class _HomeState extends State<Home> {
+class _WrapperState extends State<Wrapper> {
   bool _loading = true;
 
   //tflite varibles
@@ -138,7 +141,8 @@ class _HomeState extends State<Home> {
 
   final List<Widget> _pages = const [
     Home(),
-    MeditationScreen()
+    Profile(),
+    Settings()
   ];
 
   final RxInt _selectedIndex = 0.obs;
@@ -160,41 +164,30 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            const SizedBox(height: 30),
-            const Column(
-              children: [
-                Text(
-              'Are you an employee having stress at work. need someone to talk to?',
-              style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 6),
-            SizedBox(height: 40),
-              ],
-            ),
-            const SizedBox(height: 50,),
-            SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  children: <Widget>[
-                    CustomButton(onTap: moveToManageStress, text: "Manage Stress"),
-                    const SizedBox(height: 12,),
-                    CustomButton(onTap: moveToTherepist, text: "Talk to a Therapist"),
-                    const SizedBox(height: 12,),
-                    CustomButton(onTap: moveToMeditation, text: "Meditation"),
-                    const SizedBox(height: 12,),
-                    CustomButton(onTap: moveToSensation, text: "Sensations"),
-                    const SizedBox(height: 12,),
-                  ],
-                ))
-          ],
-        ),
+      body: Obx(
+        () => _pages[_selectedIndex.value],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex.value,
+        onTap: _onTabTapped,
+        backgroundColor: Colors.black,
+        unselectedItemColor: Color.fromARGB(150, 255, 255, 255),
+        selectedItemColor: Colors.white,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+      )
     );
   }
 }
