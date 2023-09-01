@@ -26,17 +26,12 @@ class _WrapperState extends State<Wrapper> {
   //tflite varibles
   late File _image;
   List _output = [];
-  //List<Map<String, dynamic>> _output = [];
   final picker = ImagePicker(); //Allows picking image from galler or camera
 
   @override
   void initState() {
     super.initState();
     loadModel();
-
-    // .then((value) {
-    //   setState(() {});
-    // });
   }
 
   //Preprocessing the Image
@@ -170,7 +165,7 @@ class _WrapperState extends State<Wrapper> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex.value,
         onTap: _onTabTapped,
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xff2D2E33),
         unselectedItemColor: Color.fromARGB(150, 255, 255, 255),
         selectedItemColor: Colors.white,
         items: const [

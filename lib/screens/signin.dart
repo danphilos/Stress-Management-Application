@@ -52,13 +52,11 @@ class _SignInScreenState extends State<SignInScreen> {
       _isLoading = true;
     });
     try {
-      // moveToHome();
       if (_formKey.currentState!.validate()) {
-        print(_usernameController.text.trim());
       final loggedInUser = await database.logIn(_usernameController.text.trim(), _passwordController.text.trim());
       if (loggedInUser != null) {
         // Successfully logged in
-        kDefaultDialog2("Success", "Good vibe");
+        moveToHome();
       } else {
         // Invalid credentials
         kDefaultDialog2("Failed", "Invalid username or password");

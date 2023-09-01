@@ -26,13 +26,14 @@ class MindDatabase {
   Future _createDB(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final textType = 'TEXT NOT NULL';
+    final usernameType = 'TEXT NOT NULL UNIQUE';
     final boolType = 'BOOLEAN NOT NULL';
     final integerType = 'INTEGER NOT NULL';
 
     await db.execute('''
 CREATE TABLE $tableUsers ( 
   ${UserFields.id} $idType, 
-  ${UserFields.username} $textType,
+  ${UserFields.username} $usernameType,
   ${UserFields .password} $textType
   )
 ''');
@@ -127,35 +128,3 @@ CREATE TABLE $tableUsers (
   }
 
 }
-
-// class DBHelper {
-//   static Database? _database;
-
-//   static Future<Database> get database async {
-//     if (_database != null) {
-//       return _database!;
-//     }
-
-//     _database = await initDB();
-//     return _database!;
-//   }
-
-//   static Future<Database> initDB() async {
-//     final dbPath = await getDatabasesPath();
-//     final path = join(dbPath, 'my_database.db');
-
-//     return await openDatabase(
-//       path,
-//       version: 1,
-//       onCreate: (db, version) async {
-//         await db.execute('''
-//           CREATE TABLE IF NOT EXISTS tasks(
-//             id INTEGER PRIMARY KEY,
-//             title TEXT,
-//             description TEXT
-//           )
-//         ''');
-//       },
-//     );
-//   }
-// }

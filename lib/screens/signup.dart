@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:stress_management_app/db/users_database.dart';
 import 'package:stress_management_app/models/user.dart';
 import 'package:stress_management_app/utils/constants.dart';
+import 'package:stress_management_app/utils/validator.dart';
+import 'package:stress_management_app/utils/wrapper.dart';
 import 'package:stress_management_app/widgets/button.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/screens/signin.dart';
@@ -18,6 +21,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
   void moveToSignIn() {
     Get.off(
       () => const SignInScreen(),
+      transition: Transition.cupertino,
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeOut,
+    );
+  }
+
+  void moveToHome() {
+    Get.off(
+      () => const Wrapper(),
       transition: Transition.cupertino,
       duration: const Duration(milliseconds: 600),
       curve: Curves.easeOut,
@@ -40,35 +52,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
     setState(() {
       _isLoading = true;
     });
-    print("Hello");
+    
     try {
-      // moveToHome();
-      // if (_formKey.currentState!.validate()) {
-        final newUser = User(id: 1, username: 'newuser2', password: 'password');
+      if (_formKey.currentState!.validate()) {
+        final newUser = User(username: _usernameController.text.trim(), password: _passwordController.text.trim());
         final loggedInUser = await database.signUp(newUser);
-
-        print("here $loggedInUser");
 
       if (loggedInUser != null) {
         // Successfully logged in
-        kDefaultDialog2("Success", "Good vibe");
+        kDefaultDialog("Successful", "Continue to Home", onYesPressed: moveToHome);
       } else {
         // Invalid credentials
         kDefaultDialog2("Failed", "Invalid username or password");
       }
-      // }
+      }
     } catch (error) {
-      print(error);
       kDefaultDialog2("Error", "$error");
+
+      if (error is DatabaseException && error.isUniqueConstraintError()) {
+        kDefaultDialog2("Username is not unique", "Please choose another username");
+      } else {
+        kDefaultDialog2("Error", "$error");
+      }
     }
   
+  }
+
+  @override
+  void initState() {
+    _usernameController = TextEditingController();
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
-        onTap: (){},
+        onTap: (){
+          _focusUsername.unfocus();
+          _focusEmail.unfocus();
+          _focusPassword.unfocus();
+        },
         child: SafeArea(
           child: SingleChildScrollView(
             reverse: true,
@@ -98,6 +132,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 32,
                       ),
                     Form(
+                      key: _formKey,
                       child: Column(children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,8 +145,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 TextFormField(
                                   style: TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
-                                // controller: _passwordController,
-                                // focusNode: _focusPassword,
+                                controller: _usernameController,
+                                focusNode: _focusUsername,
+                                validator: (value) =>
+                                    Validator.validateUsername(
+                                  username: value,
+                                ),
                                 decoration: inputDecorationConst.copyWith(
                                   labelText: "username",
                                 )
@@ -129,8 +168,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 TextFormField(
                                   style: TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
-                                // controller: _passwordController,
-                                // focusNode: _focusPassword,
+                                controller: _emailController,
+                                focusNode: _focusEmail,
+                                validator: (value) =>
+                                    Validator.validateEmail(
+                                  email: value,
+                                ),
                                 decoration: inputDecorationConst.copyWith(
                                   labelText: "email",
                                 )
@@ -149,9 +192,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 TextFormField(
                                   style: TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
-                                // controller: _passwordController,
+                                controller: _passwordController,
                                 obscureText: true,
-                                // focusNode: _focusPassword,
+                                focusNode: _focusPassword,
+                                validator: (value) =>
+                                    Validator.validatePassword(
+                                  password: value,
+                                ),
                                 decoration: inputDecorationConst.copyWith(
                                   labelText: "password",
                                 )

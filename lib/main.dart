@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:stress_management_app/db/users_database.dart';
+import 'package:stress_management_app/models/user.dart';
 import 'package:stress_management_app/screens/meditation.dart';
 import 'package:stress_management_app/screens/splash_screen.dart';
 import 'package:get/get.dart';
@@ -15,13 +17,23 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final database = openDatabase(
     join(await getDatabasesPath(), 'mind.db'),
+    // MindDatabase._createDB()
+    onCreate: (db, version) async {
+      // _createDB(db, version);
+      final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    final textType = 'TEXT NOT NULL';
+    final usernameType = 'TEXT NOT NULL UNIQUE';
+    final boolType = 'BOOLEAN NOT NULL';
+    final integerType = 'INTEGER NOT NULL';
 
-  //   onCreate: (db, version) {
-  //   // Run the CREATE TABLE statement on the database.
-  //   return db.execute(
-  //     'CREATE TABLE users(id INTEGER PRIMARY KEY, username TEXT, password TEXT)',
-  //   );
-  // },
+    await db.execute('''
+CREATE TABLE "users" ( 
+  ${UserFields.id} $idType, 
+  ${UserFields.username} $usernameType,
+  ${UserFields .password} $textType
+  )
+''');
+    },
   version: 1,
   );
 }
@@ -55,7 +67,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "NunitoSans",
-        scaffoldBackgroundColor: const Color(0xff101010),
+        scaffoldBackgroundColor: const Color(0xff1F1F1F),
       ),
     );
   }

@@ -19,7 +19,7 @@ class User {
   final String password;
 
   const User({
-    required this.id,
+    this.id,
     required this.username,
     required this.password,
   });
