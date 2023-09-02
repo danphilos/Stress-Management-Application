@@ -25,10 +25,6 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
   void initState() {
     super.initState();
     loadModel();
-
-    // .then((value) {
-    //   setState(() {});
-    // });
   }
 
   //Preprocessing the Image
@@ -126,12 +122,29 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
                       width: 500,
                       child: Column(
                         children: <Widget>[
-                          Image.asset('assets/stress3.jpg'),
+                          Container(
+                            // color: Colors.red,
+                            // width: 500,
+                            height: 250,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              image: DecorationImage(image: AssetImage('assets/stress3.jpg'), fit: BoxFit.fill),
+                              borderRadius: BorderRadius.circular(12)
+                            ),
+                            // child: Image.asset('assets/stress3.jpg')),
+                            child: Text("")),
                         ],
                       ))
                   : Column(
                     children: <Widget>[
-                      Image.file(_image),
+                      Container( height: 250,
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              image: DecorationImage(image: FileImage(_image), fit: BoxFit.fill),
+                              borderRadius: BorderRadius.circular(12)
+                            ),
+                            // child: Image.file(_image, height: 250,)),
+                            child: Text("")),
                       const SizedBox(height: 20),
                       Text(
                               '${_output[0]['label']}',

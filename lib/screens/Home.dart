@@ -1,8 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:tflite/tflite.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:stress_management_app/widgets/button.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/screens/manage_stress.dart';
@@ -18,87 +15,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool _loading = true;
-
-  //tflite varibles
-  late File _image;
-  List _output = [];
-  //List<Map<String, dynamic>> _output = [];
-  final picker = ImagePicker(); //Allows picking image from galler or camera
-
-  @override
-  void initState() {
-    super.initState();
-    loadModel();
-
-    // .then((value) {
-    //   setState(() {});
-    // });
-  }
-
-  //Preprocessing the Image
-  classifyImage(File image) async {
-    dynamic output = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 2,
-      threshold: 0.6,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-
-    setState(() {
-      _output = output;
-
-      ///issues here
-      _loading = false;
-    });
-  }
-
-  //Loading the Model
-  loadModel() async {
-    await Tflite.loadModel(
-        model: 'assets/model_unquant.tflite', labels: 'assets/labels.txt');
-  }
-
-  //Picking image via camera
-  pickCameraImage() async {
-    var image = await picker.pickImage(source: ImageSource.camera);
-    if (image == null) {
-      return null;
-    } else {
-      _image = File(image.path);
-    }
-
-    // setState(() {
-    //   _image = File(image.path);
-    // });
-
-    classifyImage(_image);
-  }
-
-  //Picking Image via Gallary
-  pickGalleryImage() async {
-    var image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
-      return null;
-    } else {
-      _image = File(image.path);
-    }
-
-    // setState(() {
-    //   _image = File(image.path);
-    // });
-
-    classifyImage(_image);
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    //Tflite.close();
-    super.dispose();
-  }
-
   void moveToManageStress() {
     Get.to(
       () => const ManageStressScreen(),
@@ -134,28 +50,6 @@ class _HomeState extends State<Home> {
       curve: Curves.easeOut,
     );
   }
-
-
-  final List<Widget> _pages = const [
-    Home(),
-    MeditationScreen()
-  ];
-
-  final RxInt _selectedIndex = 0.obs;
-
-  void _onTabTapped(int index) {
-    setState(() {
-      _selectedIndex.value = index;
-    });
-  }
-
-  bool shouldShowBottomNavBar(String route) {
-    // List of routes where the bottom navigation bar should be visible
-    final visibleRoutes = ['/home', '/profile', '/settings'];
-
-    return visibleRoutes.contains(route);
-  }
-
 
   @override
   Widget build(BuildContext context) {
