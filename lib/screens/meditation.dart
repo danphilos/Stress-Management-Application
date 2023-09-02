@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:stress_management_app/components/button.dart';
+import 'package:stress_management_app/widgets/button.dart';
 
 class MeditationScreen extends StatefulWidget {
   const MeditationScreen({super.key});
