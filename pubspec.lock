@@ -45,10 +45,25 @@ packages:
     dependency: transitive
     description:
       name: camera_platform_interface
+<<<<<<< HEAD
+      sha256: "8734d1c682f034bdb12d0d6ff379b0535a9b8e44266b530025bf8266d6a62f28"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.2"
+  camera_web:
+    dependency: transitive
+    description:
+      name: camera_web
+      sha256: d4c2c571c7af04f8b10702ca16bb9ed2a26e64534171e8f75c9349b2c004d8f1
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.2+3"
+=======
       sha256: "60fa0bb62a4f3bf3a7c413e31e4cd01b69c779ccc8e4668904a24581b86c316b"
       url: "https://pub.dev"
     source: hosted
     version: "2.5.1"
+>>>>>>> ba4d2787e67a2799aa4a03901631fdd9f859cd4d
   characters:
     dependency: transitive
     description:
@@ -85,10 +100,10 @@ packages:
     dependency: "direct main"
     description:
       name: cupertino_icons
-      sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
+      sha256: d57953e10f9f8327ce64a508a355f0b1ec902193f66288e8cb5070e7c47eeb2d
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.5"
+    version: "1.0.6"
   fake_async:
     dependency: transitive
     description:
@@ -212,10 +227,17 @@ packages:
     dependency: "direct main"
     description:
       name: image_picker
+<<<<<<< HEAD
+      sha256: "7d7f2768df2a8b0a3cefa5ef4f84636121987d403130e70b17ef7e2cf650ba84"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
+=======
       sha256: "841837258e0b42c80946c43443054fc726f5e8aa84a97f363eb9ef0d45b33c14"
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+>>>>>>> ba4d2787e67a2799aa4a03901631fdd9f859cd4d
   image_picker_android:
     dependency: transitive
     description:
@@ -420,10 +442,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: "43798d895c929056255600343db8f049921cbec94d31ec87f1dc5c16c01935dd"
+      sha256: da3fdfeccc4d4ff2da8f8c556704c08f912542c5fb3cf2233ed75372384a034d
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.5"
+    version: "2.1.6"
   quiver:
     dependency: transitive
     description:
@@ -445,6 +467,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+<<<<<<< HEAD
+=======
   sqflite:
     dependency: "direct main"
     description:
@@ -461,6 +485,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.5.0"
+>>>>>>> ba4d2787e67a2799aa4a03901631fdd9f859cd4d
   stack_trace:
     dependency: transitive
     description:
@@ -573,6 +598,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.4-beta"
+<<<<<<< HEAD
+=======
   win32:
     dependency: transitive
     description:
@@ -589,6 +616,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+>>>>>>> ba4d2787e67a2799aa4a03901631fdd9f859cd4d
   xml:
     dependency: transitive
     description:
@@ -598,5 +626,10 @@ packages:
     source: hosted
     version: "6.3.0"
 sdks:
+<<<<<<< HEAD
+  dart: ">=3.1.0 <4.0.0"
+  flutter: ">=3.13.0"
+=======
   dart: ">=3.1.0-185.0.dev <4.0.0"
   flutter: ">=3.7.0"
+>>>>>>> ba4d2787e67a2799aa4a03901631fdd9f859cd4d
