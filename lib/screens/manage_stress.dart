@@ -102,6 +102,9 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
             const SizedBox(height: 40),
             Column(
               children: [
+                IconButton(onPressed: (){
+                  Navigator.of(context).pop();
+                }, icon: Icon(Icons.arrow_back, color: Colors.white,)),
                 const Text(
               'Manage your Stress with the Power of AI',
               style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),

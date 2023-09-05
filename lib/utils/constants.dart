@@ -48,7 +48,7 @@ Future kDefaultDialog(String title, String message,
     await Get.dialog(
       CupertinoAlertDialog(
         title: Text(title),
-        content: Text(message),
+        content: Text(message, style: TextStyle(color: Colors.white)),
         actions: [
           if (onYesPressed != null)
             CupertinoDialogAction(
@@ -74,7 +74,7 @@ Future kDefaultDialog(String title, String message,
     await Get.dialog(
       AlertDialog(
         title: Text(title),
-        content: Text(message),
+        content: Text(message, style: TextStyle(color: Colors.white)),
         actions: [
           if (onYesPressed != null)
             TextButton(
@@ -97,7 +97,7 @@ Future kDefaultDialog(String title, String message,
             child: Text(
               (onYesPressed == null) ? "Ok" : "Yes",
               style: const TextStyle(
-                color: Color(0xff1a1a1a),
+                color: Color(0xFFE99600),
               ),
             ),
           ),
@@ -111,28 +111,37 @@ Future kDefaultDialog(String title, String message,
 Future kDefaultDialog2(String title, String message) async {
   if (GetPlatform.isIOS) {
     await Get.dialog(
-      CupertinoAlertDialog(
-        title: Text(title),
-        content: Text(message),
-        actions: [
-          // if (onYesPressed != null)
-          CupertinoDialogAction(
-            isDestructiveAction: true,
-            onPressed: () {
-              Get.back();
-            },
-            child: const Text(
-              "Okay",
+      CupertinoTheme(
+        data: CupertinoThemeData(
+      brightness: Brightness.dark, // You can use 'Brightness.light' for a light theme.
+      primaryColor: Colors.blue, // Change the background color.
+      textTheme: CupertinoTextThemeData(
+        primaryColor: Colors.white, // Change the text color.
+      ),
+    ),
+        child: CupertinoAlertDialog(
+          title: Text(title),
+          content: Text(message, style: TextStyle(color: Colors.white)),
+          actions: [
+            // if (onYesPressed != null)
+            CupertinoDialogAction(
+              isDestructiveAction: true,
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text(
+                "Okay",
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   } else {
     await Get.dialog(
       AlertDialog(
         title: Text(title),
-        content: Text(message),
+        content: Text(message, style: TextStyle(color: Colors.white),),
         actions: [
           TextButton(
             onPressed: () {
@@ -141,7 +150,7 @@ Future kDefaultDialog2(String title, String message) async {
             child: const Text(
               "Okay",
               style: TextStyle(
-                color: Color(0xFFEB5757),
+                color: Color(0xFFE99600),
               ),
             ),
           ),

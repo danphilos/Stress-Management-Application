@@ -148,13 +148,6 @@ class _WrapperState extends State<Wrapper> {
     });
   }
 
-  bool shouldShowBottomNavBar(String route) {
-    // List of routes where the bottom navigation bar should be visible
-    final visibleRoutes = ['/home', '/profile', '/settings'];
-
-    return visibleRoutes.contains(route);
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -162,26 +155,31 @@ class _WrapperState extends State<Wrapper> {
       body: Obx(
         () => _pages[_selectedIndex.value],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex.value,
-        onTap: _onTabTapped,
-        backgroundColor: const Color(0xff2D2E33),
-        unselectedItemColor: Color.fromARGB(150, 255, 255, 255),
-        selectedItemColor: Colors.white,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.only(bottom: 8, top: 8),
+        color: const Color(0xff2D2E33),
+        child: BottomNavigationBar(
+          elevation: 0,
+          currentIndex: _selectedIndex.value,
+          onTap: _onTabTapped,
+          backgroundColor: const Color(0xff2D2E33),
+          unselectedItemColor: const Color.fromARGB(150, 255, 255, 255),
+          selectedItemColor: Colors.white,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ],
+        ),
       )
     );
   }

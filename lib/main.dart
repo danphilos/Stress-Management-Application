@@ -67,7 +67,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "NunitoSans",
+        dialogBackgroundColor: const Color(0xff2D2E33),
         scaffoldBackgroundColor: const Color(0xff1F1F1F),
+        textTheme: TextTheme(
+          // Change the text color
+          headline6: TextStyle(color: Colors.white),
+        ),
       ),
     );
   }
