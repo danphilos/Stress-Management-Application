@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:stress_management_app/utils/constants.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -93,81 +94,72 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Manage Stress', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
+        elevation: 0,
+        backgroundColor: kLeadBlack,
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const SizedBox(height: 40),
             Column(
               children: [
-                IconButton(onPressed: (){
-                  Navigator.of(context).pop();
-                }, icon: Icon(Icons.arrow_back, color: Colors.white,)),
-                const Text(
-              'Manage your Stress with the Power of AI',
-              style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 6),
-            const Text(
-              'Help us Understand you better by taking a Clear Photo using your front Camera',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
+              const Column(
+                children: [
+                  Text(
+                    'Manage your Stress with the Power of AI',
+                    style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(height: 40),
-            Container(
-              child: _loading
-                  ? SizedBox(
-                      width: 500,
+              const SizedBox(height: 6),
+              const Text(
+                'Help us Understand you better by taking a Clear Photo using your front Camera',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: 40),
+              Container(
+                child: _loading
+                    ? SizedBox(
+                        child: Column(
+                          children: <Widget>[
+                            ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.asset('assets/stress3.jpg')),
+                          ],
+                        ))
+                    : SizedBox(
+                      width: MediaQuery.of(context).size.width - 24,
                       child: Column(
                         children: <Widget>[
-                          Container(
-                            // color: Colors.red,
-                            // width: 500,
-                            height: 250,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              image: DecorationImage(image: AssetImage('assets/stress3.jpg'), fit: BoxFit.fill),
-                              borderRadius: BorderRadius.circular(12)
-                            ),
-                            // child: Image.asset('assets/stress3.jpg')),
-                            child: Text("")),
+                          ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.file(_image, height: 250,)),
+                          const SizedBox(height: 20),
+                          Text(
+                                  '${_output[0]['label']}',
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                          const SizedBox(height: 10),
                         ],
-                      ))
-                  : Column(
-                    children: <Widget>[
-                      Container( height: 250,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              image: DecorationImage(image: FileImage(_image), fit: BoxFit.fill),
-                              borderRadius: BorderRadius.circular(12)
-                            ),
-                            // child: Image.file(_image, height: 250,)),
-                            child: Text("")),
-                      const SizedBox(height: 20),
-                      Text(
-                              '${_output[0]['label']}',
-                              style: const TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-            ),
+                      ),
+                    ),
+              ),
               ],
             ),
-            const SizedBox(height: 50,),
+
+            // The Buttons
             SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: <Widget>[
                     CustomButton(onTap: pickCameraImage, text: "Capture"),
                     const SizedBox(height: 12,),
-                    CustomButton(onTap: pickGalleryImage, text: "Gallery")
+                    CustomButton(onTap: pickGalleryImage, text: "Gallery"),
+                    const SizedBox(height: 24,),
                   ],
                 ))
           ],

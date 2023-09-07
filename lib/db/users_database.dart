@@ -12,7 +12,7 @@ class MindDatabase {
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await _initDB('mind.db');
+    _database = await _initDB('mind2.db');
     return _database!;
   }
 
@@ -24,17 +24,16 @@ class MindDatabase {
   }
 
   Future _createDB(Database db, int version) async {
-    final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    final textType = 'TEXT NOT NULL';
-    final usernameType = 'TEXT NOT NULL UNIQUE';
-    final boolType = 'BOOLEAN NOT NULL';
-    final integerType = 'INTEGER NOT NULL';
+    const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    const textType = 'TEXT NOT NULL';
+    const usernameType = 'TEXT NOT NULL UNIQUE';
 
     await db.execute('''
 CREATE TABLE $tableUsers ( 
   ${UserFields.id} $idType, 
   ${UserFields.username} $usernameType,
-  ${UserFields .password} $textType
+  ${UserFields.password} $textType,
+  ${UserFields.email} $textType
   )
 ''');
   }
@@ -64,11 +63,6 @@ CREATE TABLE $tableUsers (
 
   Future<List<User>> readAllUser() async {
     final db = await instance.database;
-
-    // final orderBy = '${NoteFields.time} ASC';
-    // final result =
-    //     await db.rawQuery('SELECT * FROM $tableNotes ORDER BY $orderBy');
-
     final result = await db.query(tableUsers);
 
     return result.map((json) => User.fromJson(json)).toList();

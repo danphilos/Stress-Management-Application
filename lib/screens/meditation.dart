@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:stress_management_app/screens/breath.dart';
+import 'package:stress_management_app/utils/constants.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -105,29 +108,28 @@ class _MeditationScreenState extends State<MeditationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Meditation', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
+        elevation: 0,
+        backgroundColor: kLeadBlack,
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 40),
             const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-              'Meditation',
-              style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 6),
-            Text(
-              'Discover Happiness',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 40),
+                  Text(
+                    'Just give yourself a moment to breath',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                    ),
+                  ),
+                  SizedBox(height: 40),
               ],
             ),
             Container(
@@ -193,15 +195,15 @@ class _MeditationScreenState extends State<MeditationScreen> {
               ]
             ),
             ),
-            SizedBox(height: 50,),
-                const Text(
-              'Have you taken a Deep Breath',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
-              ),
-            ),
+
+            CustomButton(onTap: () {
+              Get.to(
+      () => const BreathScreen(),
+      transition: Transition.cupertino,
+      duration: const Duration(milliseconds: 600),
+      curve: Curves.easeOut,
+    );
+            }, text: "Try the Breathing Exercise"),
           ],
         ),
       ),

@@ -1,13 +1,11 @@
-// import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:stress_management_app/utils/constants.dart';
 import 'package:stress_management_app/utils/validator.dart';
 import 'package:stress_management_app/widgets/button.dart';
 import 'package:stress_management_app/screens/signup.dart';
 import 'package:get/get.dart';
-import 'package:stress_management_app/screens/home.dart';
 import 'package:stress_management_app/utils/wrapper.dart';
 import 'package:stress_management_app/db/users_database.dart';
 
@@ -21,6 +19,9 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   MindDatabase database = MindDatabase.instance;
 
+  final storage = GetStorage();
+  late String username = "";
+  late String? email = "";
   bool _isLoading = false;
   late final TextEditingController _usernameController;
   late final TextEditingController _passwordController;
@@ -55,22 +56,33 @@ class _SignInScreenState extends State<SignInScreen> {
       if (_formKey.currentState!.validate()) {
       final loggedInUser = await database.logIn(_usernameController.text.trim(), _passwordController.text.trim());
       if (loggedInUser != null) {
-        // Successfully logged in
+        username = loggedInUser.username;
+        email = loggedInUser.email;
+
+        storage.write('profile', {
+          "username": username,
+          "email": email
+        });
         moveToHome();
       } else {
-        // Invalid credentials
         kDefaultDialog2("Failed", "Invalid username or password");
       }
       }
     } catch (error) {
-      print(error);
       kDefaultDialog2("Error", "$error");
     }
+
+    
 
     setState(() {
       _isLoading = false;
     });
+  }
 
+  void _togglePasswordVisibility() {
+    setState(() {
+      _showPassword = !_showPassword;
+    });
   }
 
   @override
@@ -159,7 +171,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                                 const SizedBox(height: 4),
                                 TextFormField(
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
                                 controller: _passwordController,
                                 obscureText: !_showPassword,
@@ -170,6 +182,23 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                                 decoration: inputDecorationConst.copyWith(
                                   labelText: "password",
+                                  suffixIcon: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: GestureDetector(
+                                      onTap: _togglePasswordVisibility,
+                                      child: SvgPicture.asset(
+                                        _showPassword
+                                            ? "assets/icons/password_invisible.svg"
+                                            : "assets/icons/password_visible.svg",
+                                        height: 15,
+                                        width: 20,
+                                        colorFilter: const ColorFilter.mode(
+                                            Colors.white, BlendMode.srcIn),
+                                      ),
+                                    ),
+                                  ),
+                                  suffixIconConstraints:
+                                      const BoxConstraints(maxWidth: 50),
                                 )
                                 ),
                                 const SizedBox(

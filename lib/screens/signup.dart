@@ -55,7 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     
     try {
       if (_formKey.currentState!.validate()) {
-        final newUser = User(username: _usernameController.text.trim(), password: _passwordController.text.trim());
+        final newUser = User(username: _usernameController.text.trim(), password: _passwordController.text.trim(), email: _emailController.text.trim());
         final loggedInUser = await database.signUp(newUser);
 
       if (loggedInUser != null) {
@@ -92,6 +92,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _togglePasswordVisibility() {
+    setState(() {
+      _showPassword = !_showPassword;
+    });
   }
 
   @override
@@ -166,7 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 const SizedBox(height: 4),
                                 TextFormField(
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
                                 controller: _emailController,
                                 focusNode: _focusEmail,
@@ -190,10 +196,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 const SizedBox(height: 4),
                                 TextFormField(
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
                                 controller: _passwordController,
-                                obscureText: true,
+                                obscureText: !_showPassword,
                                 focusNode: _focusPassword,
                                 validator: (value) =>
                                     Validator.validatePassword(
@@ -201,6 +207,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 decoration: inputDecorationConst.copyWith(
                                   labelText: "password",
+                                  suffixIcon: Padding(
+                                    padding: const EdgeInsets.only(right: 15),
+                                    child: GestureDetector(
+                                      onTap: _togglePasswordVisibility,
+                                      child: SvgPicture.asset(
+                                        _showPassword
+                                            ? "assets/icons/password_invisible.svg"
+                                            : "assets/icons/password_visible.svg",
+                                        height: 15,
+                                        width: 20,
+                                        colorFilter: const ColorFilter.mode(
+                                            Colors.white, BlendMode.srcIn),
+                                      ),
+                                    ),
+                                  ),
+                                  suffixIconConstraints:
+                                      const BoxConstraints(maxWidth: 50),
                                 )
                                 ),
                                 const SizedBox(

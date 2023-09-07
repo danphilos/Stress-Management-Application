@@ -1,6 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+
+
+//colors
+const kLeadBlack = Color(0xff1F1F1F);
+const kModelBlack = Color(0xff2D2E33);
+const kYellow = Color(0xffe99600);
+const kYellowHighlight = Color.fromARGB(255, 245, 168, 25);
+
 
 // text
 const kNunitoSansSemiBold18 = TextStyle(
@@ -9,6 +18,15 @@ const kNunitoSansSemiBold18 = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.w600,
 );
+
+const kNunitoSans16 = TextStyle(
+  fontFamily: "NunitoSans",
+  fontSize: 17,
+  color: Colors.white,
+);
+
+/// Simple preloader inside a Center widget
+const preloader = Center(child: CircularProgressIndicator(color: Colors.white));
 
 // input field
 const inputDecorationConst = InputDecoration(
@@ -48,7 +66,7 @@ Future kDefaultDialog(String title, String message,
     await Get.dialog(
       CupertinoAlertDialog(
         title: Text(title),
-        content: Text(message, style: TextStyle(color: Colors.white)),
+        content: Text(message, style: const TextStyle(color: Colors.white)),
         actions: [
           if (onYesPressed != null)
             CupertinoDialogAction(
@@ -74,7 +92,7 @@ Future kDefaultDialog(String title, String message,
     await Get.dialog(
       AlertDialog(
         title: Text(title),
-        content: Text(message, style: TextStyle(color: Colors.white)),
+        content: Text(message, style: const TextStyle(color: Colors.white)),
         actions: [
           if (onYesPressed != null)
             TextButton(
@@ -83,9 +101,7 @@ Future kDefaultDialog(String title, String message,
               },
               child: const Text(
                 "Cancel",
-                style: TextStyle(
-                  color: Color(0xFFEB5757),
-                ),
+                style: TextStyle(color: Colors.white),
               ),
             ),
           TextButton(
@@ -112,8 +128,8 @@ Future kDefaultDialog2(String title, String message) async {
   if (GetPlatform.isIOS) {
     await Get.dialog(
       CupertinoTheme(
-        data: CupertinoThemeData(
-      brightness: Brightness.dark, // You can use 'Brightness.light' for a light theme.
+        data: const CupertinoThemeData(
+      brightness: Brightness.dark,
       primaryColor: Colors.blue, // Change the background color.
       textTheme: CupertinoTextThemeData(
         primaryColor: Colors.white, // Change the text color.
@@ -121,7 +137,7 @@ Future kDefaultDialog2(String title, String message) async {
     ),
         child: CupertinoAlertDialog(
           title: Text(title),
-          content: Text(message, style: TextStyle(color: Colors.white)),
+          content: Text(message, style: const TextStyle(color: Colors.white)),
           actions: [
             // if (onYesPressed != null)
             CupertinoDialogAction(
@@ -141,7 +157,7 @@ Future kDefaultDialog2(String title, String message) async {
     await Get.dialog(
       AlertDialog(
         title: Text(title),
-        content: Text(message, style: TextStyle(color: Colors.white),),
+        content: Text(message, style: const TextStyle(color: Colors.white),),
         actions: [
           TextButton(
             onPressed: () {

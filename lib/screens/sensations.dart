@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:stress_management_app/utils/constants.dart';
+import 'package:stress_management_app/widgets/button.dart';
 
 class SensationsScreen extends StatefulWidget {
   const SensationsScreen({super.key});
@@ -23,19 +25,69 @@ class _SensationsScreenState extends State<SensationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Sensations', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
+        elevation: 0,
+        backgroundColor: kLeadBlack,
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: const Column(
+        child: Column(
           children: <Widget>[
-            SizedBox(height: 40),
             Column(
               children: [
+            const SizedBox(height: 24),
+
+            const Row(
+              children: [
                 Text(
-              'Sensations',
-              style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+                  'Kill Anxiety, ',
+                  style: TextStyle(color: Colors.white, fontSize: 20),),
+                  Text(
+                  'Stay Calm',
+                  style: TextStyle(color: Colors.white, fontSize: 20),),
+              ],
             ),
-            SizedBox(height: 6),
-            SizedBox(height: 40),
+
+              const SizedBox(height: 15,),
+
+              ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.asset('assets/stress3.jpg')),
+
+              const SizedBox(height: 24,),
+
+              const Row(
+                children: [
+                  Text(
+                  'Playlist by Immie',
+                  style: TextStyle(color: Colors.white, fontSize: 20),),
+                ],
+              ),
+
+              const SizedBox(height: 16,),
+
+              const Row(
+                children: [
+                  Icon(Icons.play_circle, color: Colors.white,),
+                  SizedBox(width: 12,),
+                  Text(
+                  'Hello - By Adele',
+                  style: TextStyle(color: Colors.white, fontSize: 20),),
+                ],
+              ),
+              const SizedBox(height: 4,),
+              const Row(
+                children: [
+                  Icon(Icons.play_circle, color: Colors.white,),
+                  SizedBox(width: 12,),
+                  Text(
+                  'Stay so - By Busy Signal',
+                  style: TextStyle(color: Colors.white, fontSize: 20),),
+                ],
+              ),
+
+              const SizedBox(height: 16,),
+
+              CustomButton(onTap: (){}, text: "Add Music",),
               ],
             ),
           ],

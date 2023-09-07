@@ -1,81 +1,36 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:stress_management_app/db/users_database.dart';
-import 'package:stress_management_app/models/user.dart';
-import 'package:stress_management_app/screens/meditation.dart';
+import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:stress_management_app/screens/splash_screen.dart';
 import 'package:get/get.dart';
-import 'package:stress_management_app/screens/home.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:flutter/widgets.dart';
+import 'package:stress_management_app/utils/constants.dart';
 
 void main() async {
-  runApp(MyApp());
-
+  await GetStorage.init();
+  runApp(const MyApp());
   WidgetsFlutterBinding.ensureInitialized();
-  final database = openDatabase(
-    join(await getDatabasesPath(), 'mind.db'),
-    // MindDatabase._createDB()
-    onCreate: (db, version) async {
-      // _createDB(db, version);
-      final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    final textType = 'TEXT NOT NULL';
-    final usernameType = 'TEXT NOT NULL UNIQUE';
-    final boolType = 'BOOLEAN NOT NULL';
-    final integerType = 'INTEGER NOT NULL';
-
-    await db.execute('''
-CREATE TABLE "users" ( 
-  ${UserFields.id} $idType, 
-  ${UserFields.username} $usernameType,
-  ${UserFields .password} $textType
-  )
-''');
-    },
-  version: 1,
-  );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
-
-  final List<Widget> _pages = [
-    Home(),
-    MeditationScreen()
-  ];
-
-  final RxInt _selectedIndex = 0.obs;
-
-  void _onTabTapped(int index) {
-    _selectedIndex.value = index;
-  }
-
-  bool shouldShowBottomNavBar(String route) {
-    // List of routes where the bottom navigation bar should be visible
-    final visibleRoutes = ['/home', '/profile', '/settings'];
-
-    return visibleRoutes.contains(route);
-  }
+  const MyApp({super.key});
 
   @override
   Widget build (BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: kLeadBlack),
+    );
     return GetMaterialApp(
       title: 'MindSuavie',
-      home: MySplash(),
+      home: const MySplash(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "NunitoSans",
-        dialogBackgroundColor: const Color(0xff2D2E33),
-        scaffoldBackgroundColor: const Color(0xff1F1F1F),
-        textTheme: TextTheme(
-          // Change the text color
+        dialogBackgroundColor: kModelBlack,
+        scaffoldBackgroundColor: kLeadBlack,
+        textTheme: const TextTheme(
           headline6: TextStyle(color: Colors.white),
         ),
       ),
     );
   }
 }
-
-

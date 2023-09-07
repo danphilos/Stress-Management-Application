@@ -1,27 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:stress_management_app/screens/home.dart';
 import 'package:stress_management_app/screens/signin.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:stress_management_app/utils/wrapper.dart';
 
 class MySplash extends StatefulWidget { 
-  MySplash({Key? key}) : super(key: key);
+  const MySplash({Key? key}) : super(key: key);
   
   @override
   _MySplashState createState() => _MySplashState();
 }
 
 class _MySplashState extends State <MySplash> {
+  final storage = GetStorage();
+  late Map<dynamic, dynamic>? profileMap = storage.read('profile');
+  late String username = profileMap?['username'] ?? "";
+  late String email = profileMap?['email'] ?? "";
+
+  
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2)).then((_) {
-      Get.off(() => const SignInScreen(), transition: Transition.fadeIn);
+    super.initState();
+    Future.delayed(const Duration(seconds: 2)).then((_) {
+      if (profileMap != null) {
+        if (username.isEmpty) {
+          Get.off(() => const SignInScreen(), transition: Transition.fadeIn);
+        } else {
+          Get.off(() => const Wrapper(), transition: Transition.fadeIn);
+        }
+      } else {
+        Get.off(() => const SignInScreen(), transition: Transition.fadeIn);
+      }
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
