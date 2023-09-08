@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/screens/breath.dart';
 import 'package:stress_management_app/utils/constants.dart';
-import 'package:tflite/tflite.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:stress_management_app/widgets/button.dart';
 
 class MeditationScreen extends StatefulWidget {
@@ -16,94 +13,6 @@ class MeditationScreen extends StatefulWidget {
 }
 
 class _MeditationScreenState extends State<MeditationScreen> {
-  bool _loading = true;
-
-  //tflite varibles
-  late File _image;
-  List _output = [];
-  //List<Map<String, dynamic>> _output = [];
-  final picker = ImagePicker(); //Allows picking image from galler or camera
-
-  @override
-  void initState() {
-    super.initState();
-    loadModel();
-
-    // .then((value) {
-    //   setState(() {});
-    // });
-  }
-
-  //Preprocessing the Image
-  classifyImage(File image) async {
-    dynamic output = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 2,
-      threshold: 0.6,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-
-    setState(() {
-      _output = output;
-
-      ///issues here
-      _loading = false;
-    });
-  }
-
-  //Loading the Model
-  loadModel() async {
-    await Tflite.loadModel(
-        model: 'assets/model_unquant.tflite', labels: 'assets/labels.txt');
-  }
-
-  //Picking image via camera
-  pickCameraImage() async {
-    var image = await picker.pickImage(source: ImageSource.camera);
-    if (image == null) {
-      return null;
-    } else {
-      _image = File(image.path);
-    }
-
-    // setState(() {
-    //   _image = File(image.path);
-    // });
-
-    classifyImage(_image);
-  }
-
-  //Picking Image via Gallary
-  pickGalleryImage() async {
-    var image = await picker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
-      return null;
-    } else {
-      _image = File(image.path);
-    }
-
-    // setState(() {
-    //   _image = File(image.path);
-    // });
-
-    classifyImage(_image);
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    //Tflite.close();
-    super.dispose();
-  }
-
-  final List<String> items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +41,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
                   SizedBox(height: 40),
               ],
             ),
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height - 250,
               child: ListView(
               children: const [
@@ -190,19 +99,16 @@ class _MeditationScreenState extends State<MeditationScreen> {
               ),
             ),
             SizedBox(height: 10,),
-
-              
               ]
-            ),
-            ),
+            ),),
 
             CustomButton(onTap: () {
               Get.to(
-      () => const BreathScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
+                () => const BreathScreen(),
+                transition: Transition.cupertino,
+                duration: const Duration(milliseconds: 600),
+                curve: Curves.easeOut,
+              );
             }, text: "Try the Breathing Exercise"),
           ],
         ),

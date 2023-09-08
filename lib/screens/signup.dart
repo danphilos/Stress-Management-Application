@@ -37,7 +37,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   MindDatabase database = MindDatabase.instance;
-
   bool _isLoading = false;
   late final TextEditingController _usernameController;
   late final TextEditingController _emailController;
@@ -59,10 +58,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         final loggedInUser = await database.signUp(newUser);
 
       if (loggedInUser != null) {
-        // Successfully logged in
         kDefaultDialog("Successful", "Continue to Home", onYesPressed: moveToHome);
       } else {
-        // Invalid credentials
         kDefaultDialog2("Failed", "Invalid username or password");
       }
       }
@@ -149,7 +146,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 const SizedBox(height: 4),
                                 TextFormField(
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
                                 controller: _usernameController,
                                 focusNode: _focusUsername,

@@ -147,7 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 ),
                                 const SizedBox(height: 4),
                                 TextFormField(
-                                  style: TextStyle(color: Colors.white),
+                                  style: const TextStyle(color: Colors.white),
                                   cursorColor: Colors.white,
                                 controller: _usernameController,
                                 focusNode: _focusUsername,

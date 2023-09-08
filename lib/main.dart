@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         dialogBackgroundColor: kModelBlack,
         scaffoldBackgroundColor: kLeadBlack,
         textTheme: const TextTheme(
-          headline6: TextStyle(color: Colors.white),
+          titleLarge: TextStyle(color: Colors.white),
         ),
       ),
     );
