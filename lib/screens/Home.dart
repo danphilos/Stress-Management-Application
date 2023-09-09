@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            const SizedBox(height: 20),
+            const SizedBox(height: 16),
             const Column(
               children: [
                 Text(

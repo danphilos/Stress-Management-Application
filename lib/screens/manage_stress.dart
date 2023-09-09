@@ -1,5 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:stress_management_app/screens/not_stressed.dart';
+import 'package:stress_management_app/screens/stressed_screen.dart';
 import 'package:stress_management_app/utils/constants.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
@@ -44,6 +47,25 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
       ///issues here
       _loading = false;
     });
+
+    print(output[0]['label']);
+    if(output[0]['label'] == "1 Stressed"){
+      Get.to(
+      () => const StressedScreen(),
+      transition: Transition.cupertino,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+    }
+
+    if(output[0]['label'] == "0 Not stressed"){
+      Get.to(
+      () => const NotStressedScreen(),
+      transition: Transition.cupertino,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+    }
   }
 
   //Loading the Model
@@ -61,10 +83,6 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
       _image = File(image.path);
     }
 
-    // setState(() {
-    //   _image = File(image.path);
-    // });
-
     classifyImage(_image);
   }
 
@@ -76,10 +94,6 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
     } else {
       _image = File(image.path);
     }
-
-    // setState(() {
-    //   _image = File(image.path);
-    // });
 
     classifyImage(_image);
   }
@@ -133,13 +147,12 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
                           ],
                         ))
                     : SizedBox(
-                      width: MediaQuery.of(context).size.width - 24,
                       child: Column(
                         children: <Widget>[
-                          ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.file(_image, height: 250,)),
-                          const SizedBox(height: 20),
+                          ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.file(_image, height: MediaQuery.of(context).size.height/3,)),
+                          const SizedBox(height: 10),
                           Text(
-                                  '${_output[0]['label']}',
+                                  _output[0]['label'] == "0 Not stressed" ? 'Not Stressed' : 'Stressed',
                                   style: const TextStyle(
                                       color: Colors.white, fontSize: 20),
                                 ),

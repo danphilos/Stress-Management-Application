@@ -46,6 +46,10 @@ class _SignInScreenState extends State<SignInScreen> {
       duration: const Duration(milliseconds: 600),
       curve: Curves.easeOut,
     );
+    context.showSnackBar(
+      message: 'Signed in',
+      backgroundColor: kModelBlack,
+    );
   }
 
   Future<void> _signIn() async {

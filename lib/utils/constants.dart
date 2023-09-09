@@ -9,7 +9,6 @@ const kModelBlack = Color(0xff2D2E33);
 const kYellow = Color(0xffe99600);
 const kYellowHighlight = Color.fromARGB(255, 245, 168, 25);
 
-
 // text
 const kNunitoSansSemiBold18 = TextStyle(
   fontFamily: "NunitoSans",
@@ -26,6 +25,33 @@ const kNunitoSans16 = TextStyle(
 
 /// Simple preloader inside a Center widget
 const preloader = Center(child: CircularProgressIndicator(color: Colors.white));
+
+extension ShowSnackBar on BuildContext {
+  void showSnackBar({
+    required String message,
+    Color backgroundColor = Colors.white,
+  }) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: backgroundColor,
+        elevation: 6,
+        duration: const Duration(milliseconds: 1500),
+        behavior: SnackBarBehavior.floating,
+        // width: 280.0,
+      ),
+    );
+  }
+
+  void showErrorSnackBar({required String message}) {
+    showSnackBar(message: message, backgroundColor: Colors.red);
+  }
+
+  void showSuccessSnackBar({required String message}) {
+    showSnackBar(message: message, backgroundColor: Colors.green);
+  }
+}
+
 
 // input field
 const inputDecorationConst = InputDecoration(

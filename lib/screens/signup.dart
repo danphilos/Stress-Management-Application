@@ -136,7 +136,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 16),
                         const Text(
-                        'Sign Up',
+                        'Sign Up for MindSuavie',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 24, color: Colors.white),
                       ),
@@ -169,6 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 )
                               ]
                         ),
+                        const SizedBox(height: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -192,7 +193,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 )
                               ]
                         ),
-                        const SizedBox(height: 2),
+                        const SizedBox(height: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

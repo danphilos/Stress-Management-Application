@@ -62,37 +62,16 @@ class _SensationsScreenState extends State<SensationsScreen> {
                 children: [
                   Text(
                   'Playlist by Immie',
-                  style: TextStyle(color: Colors.white, fontSize: 20),),
+                  style: kNunitoSansSemiBold18,)
                 ],
               ),
 
               const SizedBox(height: 16,),
 
               InkWell(
-                onTap: (){},
-                child: Container(
-                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 8),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    border: Border.all(color: Colors.white30),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.play_circle, color: Colors.white,),
-                      SizedBox(width: 12,),
-                      Text(
-                      'Hello - By Adele',
-                      style: TextStyle(color: Colors.white, fontSize: 20),),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8,),
-
-              InkWell(
                 onTap: (){
                   Get.to(
-                    () => PlaySong(),
+                    () => PlaySong(source: 'audio/tenderness.mp3', name: 'tenderness.mp3',),
                     transition: Transition.cupertino,
                     duration: const Duration(milliseconds: 600),
                     curve: Curves.easeOut,
@@ -109,7 +88,35 @@ class _SensationsScreenState extends State<SensationsScreen> {
                       Icon(Icons.play_circle, color: Colors.white,),
                       SizedBox(width: 12,),
                       Text(
-                      'Stay so - By Busy Signal',
+                      'Tenderness - Bensounds',
+                      style: TextStyle(color: Colors.white, fontSize: 20),),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8,),
+
+              InkWell(
+                onTap: (){
+                  Get.to(
+                    () => PlaySong(source: 'audio/slowmotion.mp3', name: 'slowmotion.mp3',),
+                    transition: Transition.cupertino,
+                    duration: const Duration(milliseconds: 600),
+                    curve: Curves.easeOut,
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    border: Border.all(color: Colors.white30),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.play_circle, color: Colors.white,),
+                      SizedBox(width: 12,),
+                      Text(
+                      'Slow Motion - Bensounds',
                       style: TextStyle(color: Colors.white, fontSize: 20),),
                     ],
                   ),
@@ -117,12 +124,15 @@ class _SensationsScreenState extends State<SensationsScreen> {
               ),
 
               const SizedBox(height: 16,),
-
-              CustomButton(onTap: (){}, text: "Add Music",),
               ],
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: kYellow,
+        onPressed: () {},
+        child: const Icon(Icons.add), // Add an icon to the FAB
       ),
     );
   }

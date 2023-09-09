@@ -46,7 +46,7 @@ class Settings extends StatelessWidget {
               InkWell(
                 onTap: moveToSignup,
                 child: Container(
-                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 4, right: 4),
+                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 4),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     border: Border.all(color: Colors.white54),
@@ -56,7 +56,7 @@ class Settings extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.info, color: kYellowHighlight, size: 32,),
+                          Icon(Icons.info, color: Colors.white70, size: 32,),
                           SizedBox(width: 12,),
                           Text(
                             "About us",
@@ -76,7 +76,7 @@ class Settings extends StatelessWidget {
               InkWell(
                 onTap: moveToSignup,
                 child: Container(
-                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 4, right: 4),
+                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 4),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                     border: Border.all(color: Colors.white54),
@@ -86,7 +86,7 @@ class Settings extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.info, color: kYellowHighlight, size: 32,),
+                          Icon(Icons.dark_mode, color: Colors.white70, size: 32,),
                           SizedBox(width: 12,),
                           Text(
                             "Theme",

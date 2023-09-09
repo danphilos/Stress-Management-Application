@@ -73,7 +73,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
             ),
             SizedBox(height: 10,),
             Text(
-              '4. Lower Anxiety',
+              '4. Improve focus',
               style: TextStyle(
                 color: Colors.white70,
                 fontWeight: FontWeight.normal,
@@ -82,16 +82,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
             ),
             SizedBox(height: 10,),
             Text(
-              '5. Improve focus',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 10,),
-            Text(
-              '6. Reduce your brain',
+              '5. Reduce your brain',
               style: TextStyle(
                 color: Colors.white70,
                 fontWeight: FontWeight.normal,

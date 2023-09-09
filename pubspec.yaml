@@ -43,6 +43,7 @@ flutter:
     - assets/icons/
     - assets/gifs/
     - assets/audio/
+    - assets/images/
 
   fonts:
     - family: NunitoSans

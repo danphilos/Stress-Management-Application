@@ -20,79 +20,102 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(height: 40),
-            const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-              'Profile',
-              style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 6),
-            Text(
-              'Manage Your Account',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 40),
-              ],
-            ),
-
-            Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Profile', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
+        elevation: 0,
+        backgroundColor: kLeadBlack,
+      ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Name",
-                    style: kNunitoSansSemiBold18,
-                  ),
-                  Text(
-                    username,
-                    style: kNunitoSans16,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  )
-                ],
+              Text(
+                'Manage Your Account',
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 18,
+                ),
               ),
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Email",
-                    style: kNunitoSansSemiBold18,
-                  ),
-                  Text(
-                    email,
-                    style: kNunitoSans16,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+              SizedBox(height: 40),
                 ],
               ),
 
-              CustomButton(onTap: (){
+
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Name",
+                            style: kNunitoSansSemiBold18,
+                          ),
+                          Text(
+                            username,
+                            style: kNunitoSans16,
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          )
+                        ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Email",
+                        style: kNunitoSansSemiBold18,
+                      ),
+                      Text(
+                        email,
+                        style: kNunitoSans16,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                  ),
+                      ],
+                    ),
                 
-                kDefaultDialog(
-                  "Sign out",
-                  "Are you sure you want to sign out?",
-                  onYesPressed: () {
-                    Get.offAll(const SignInScreen());
-                    storage.remove('profile');
-                  },
-                );
+                  
+                
+                  
+                  CustomButton(onTap: (){
+                    kDefaultDialog(
+                      "Sign out",
+                      "Are you sure you want to sign out?",
+                      onYesPressed: () {
+                        Get.offAll(const SignInScreen());
+                        storage.remove('profile');
 
+                        context.showSnackBar(
+                          message: 'Signed Out',
+                          backgroundColor: kModelBlack,
+                        );
+                      },
+                    );
+                  }, text: "Sign Out",),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12,)
 
-              }, text: "Sign Out",),
-          ],
+              
+            ],
+        ),
       ),
     );
   }
