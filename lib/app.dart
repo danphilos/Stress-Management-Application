@@ -14,7 +14,7 @@ class MindSuavieApp extends StatelessWidget {
     );
     return GetMaterialApp(
       title: 'MindSuavie',
-      home: const MySplash(),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: "NunitoSans",

@@ -3,20 +3,20 @@ import 'package:get_storage/get_storage.dart';
 import 'package:stress_management_app/screens/signin.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:stress_management_app/utils/constants.dart';
 import 'package:stress_management_app/utils/wrapper.dart';
 
-class MySplash extends StatefulWidget { 
-  const MySplash({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget { 
+  const SplashScreen({Key? key}) : super(key: key);
   
   @override
-  _MySplashState createState() => _MySplashState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _MySplashState extends State <MySplash> {
+class _SplashScreenState extends State <SplashScreen> {
   final storage = GetStorage();
   late Map<dynamic, dynamic>? profileMap = storage.read('profile');
   late String username = profileMap?['username'] ?? "";
-  late String email = profileMap?['email'] ?? "";
 
   
 
@@ -54,7 +54,7 @@ class _MySplashState extends State <MySplash> {
                     'Mind',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                      fontSize: 32,
                       color: Colors.white,
                     ),
                   ),
@@ -62,13 +62,12 @@ class _MySplashState extends State <MySplash> {
                     'Suavie',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                      color: Color(0xffFEBF00),
+                      fontSize: 32,
+                      color: kYellowHighlight,
                     ),
                   ),
                     ],
                   ),
-                  const SizedBox(height: 4),
                   const Text(
                     'feel the moment',
                     style: TextStyle(
