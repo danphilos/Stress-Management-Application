@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/screens/settings.dart';
+import 'package:stress_management_app/utils/constants.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
@@ -34,32 +35,23 @@ class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('About Us', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
+        elevation: 0,
+        backgroundColor: kLeadBlack,
+      ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 40),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    IconButton(onPressed: (){
-                      Navigator.of(context).pop();
-                    }, icon: const Icon(Icons.arrow_back, color: Colors.white, size: 28,)),
-                    const Text(
-              'About Us',
-              style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'The MindSuavie mobile app is designed to provide users with a seamless experience for managing their mental well-being.',
+              style: TextStyle(color: Colors.white, fontSize: 20),
             ),
-                  ],
-                ),
-            const SizedBox(height: 6),
-            const SizedBox(height: 40),
-
-              const SizedBox(height: 15,),
-              const SizedBox(height: 16,),
-
-              const SizedBox(height: 16,),
-              ],
+            Text(
+              'Version 1.0',
+              style: TextStyle(color: Color.fromARGB(172, 255, 255, 255), fontSize: 18),
             ),
           ],
         ),

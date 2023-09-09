@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:stress_management_app/db/users_database.dart';
 import 'package:stress_management_app/models/user.dart';
@@ -47,6 +48,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _showPassword = false;
 
+  final storage = GetStorage();
+
   Future<void> _signUp() async {
     setState(() {
       _isLoading = true;
@@ -58,9 +61,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         final loggedInUser = await database.signUp(newUser);
 
       if (loggedInUser != null) {
-        kDefaultDialog("Successful", "Continue to Home", onYesPressed: moveToHome);
+        kDefaultDialog("Successful", "Continue to Home", onYesPressed: (){
+          storage.write('profile', {
+            "username": _usernameController.text.trim(),
+            "email": _emailController.text.trim()
+          });
+          moveToHome();
+          });
       } else {
-        kDefaultDialog2("Failed", "Invalid username or password");
+        kDefaultDialog2("Failed", "Something went wrong, Try again");
       }
       }
     } catch (error) {

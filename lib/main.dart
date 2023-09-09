@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: kLeadBlack,
         textTheme: const TextTheme(
           titleLarge: TextStyle(color: Colors.white),
+          bodyMedium: TextStyle(color: Colors.white),
         ),
       ),
     );

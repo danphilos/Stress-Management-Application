@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/utils/constants.dart';
 import 'package:stress_management_app/widgets/Calendar.dart';
+import 'package:stress_management_app/widgets/meeting_link.dart';
 
 class TherapistScreen extends StatefulWidget {
   const TherapistScreen({super.key});
@@ -50,7 +51,14 @@ class _TherapistScreenState extends State<TherapistScreen> {
                   const SizedBox(height: 32,),
 
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                  Get.to(
+                    () => const MeetingLink(),
+                    transition: Transition.cupertino,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  );
+                },
                     child: Container(
                       padding: const EdgeInsets.only(bottom: 16, top: 16),
                       child: const Row(
@@ -66,7 +74,14 @@ class _TherapistScreenState extends State<TherapistScreen> {
                   ),
 
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.to(
+                    () => const MeetingLink(),
+                    transition: Transition.cupertino,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeOut,
+                  );
+                },
                 child: Container(
                   padding: const EdgeInsets.only(bottom: 16, top: 16),
                   child: const Row(

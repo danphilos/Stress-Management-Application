@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:stress_management_app/utils/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebViewApp extends StatefulWidget {
-  const WebViewApp({super.key});
+class MeetingLink extends StatefulWidget {
+  const MeetingLink({super.key});
 
   @override
-  State<WebViewApp> createState() => _WebViewAppState();
+  State<MeetingLink> createState() => _MeetingLinkState();
 }
 
-class _WebViewAppState extends State<WebViewApp> {
+class _MeetingLinkState extends State<MeetingLink> {
   late final WebViewController controller;
 
   @override
@@ -36,14 +36,14 @@ class _WebViewAppState extends State<WebViewApp> {
           },
         ),
       )
-      ..loadRequest(Uri.parse('https://calendar.google.com/calendar/u/0/r/eventedit?vcon=meet&dates=now&hl=en-GB'));
+      ..loadRequest(Uri.parse('https://meet.google.com/'));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Schedule', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
+        title: const Text('Meeting Link', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
         elevation: 0,
         backgroundColor: kLeadBlack,
       ),

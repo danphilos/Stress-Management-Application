@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:stress_management_app/screens/play_song.dart';
 import 'package:stress_management_app/utils/constants.dart';
 import 'package:stress_management_app/widgets/button.dart';
+
 
 class SensationsScreen extends StatefulWidget {
   const SensationsScreen({super.key});
@@ -65,24 +68,52 @@ class _SensationsScreenState extends State<SensationsScreen> {
 
               const SizedBox(height: 16,),
 
-              const Row(
-                children: [
-                  Icon(Icons.play_circle, color: Colors.white,),
-                  SizedBox(width: 12,),
-                  Text(
-                  'Hello - By Adele',
-                  style: TextStyle(color: Colors.white, fontSize: 20),),
-                ],
+              InkWell(
+                onTap: (){},
+                child: Container(
+                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    border: Border.all(color: Colors.white30),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.play_circle, color: Colors.white,),
+                      SizedBox(width: 12,),
+                      Text(
+                      'Hello - By Adele',
+                      style: TextStyle(color: Colors.white, fontSize: 20),),
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 4,),
-              const Row(
-                children: [
-                  Icon(Icons.play_circle, color: Colors.white,),
-                  SizedBox(width: 12,),
-                  Text(
-                  'Stay so - By Busy Signal',
-                  style: TextStyle(color: Colors.white, fontSize: 20),),
-                ],
+              const SizedBox(height: 8,),
+
+              InkWell(
+                onTap: (){
+                  Get.to(
+                    () => PlaySong(),
+                    transition: Transition.cupertino,
+                    duration: const Duration(milliseconds: 600),
+                    curve: Curves.easeOut,
+                  );
+                },
+                child: Container(
+                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(8)),
+                    border: Border.all(color: Colors.white30),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.play_circle, color: Colors.white,),
+                      SizedBox(width: 12,),
+                      Text(
+                      'Stay so - By Busy Signal',
+                      style: TextStyle(color: Colors.white, fontSize: 20),),
+                    ],
+                  ),
+                ),
               ),
 
               const SizedBox(height: 16,),

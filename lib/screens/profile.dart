@@ -35,7 +35,7 @@ class _ProfileState extends State<Profile> {
             ),
             SizedBox(height: 6),
             Text(
-              'Your Profile',
+              'Manage Your Account',
               style: TextStyle(
                 color: Colors.white70,
                 fontWeight: FontWeight.normal,

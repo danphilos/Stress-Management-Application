@@ -89,10 +89,17 @@ CREATE TABLE $tableUsers (
     );
   }
 
-  Future<User> signUp(User user) async {
-    final db = await instance.database;
-    final id = await db.insert(tableUsers, user.toJson());
-    return user.copy(id: id);
+  Future<User?> signUp(User user) async {
+    try {
+      final db = await instance.database;
+      final id = await db.insert(tableUsers, user.toJson());
+      return user.copy(id: id);
+    } catch (e) {
+      return null;
+    }
+    
+
+    
   }
 
   Future<User?> logIn(String username, String password) async {
