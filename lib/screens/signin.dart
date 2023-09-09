@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:stress_management_app/utils/constants.dart';
+import 'package:stress_management_app/utils/navigation.dart';
+import 'package:stress_management_app/utils/util_functions.dart';
 import 'package:stress_management_app/utils/validator.dart';
 import 'package:stress_management_app/widgets/button.dart';
-import 'package:stress_management_app/screens/signup.dart';
-import 'package:get/get.dart';
-import 'package:stress_management_app/utils/wrapper.dart';
 import 'package:stress_management_app/db/users_database.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -18,7 +17,6 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   MindDatabase database = MindDatabase.instance;
-
   final storage = GetStorage();
   late String username = "";
   late String? email = "";
@@ -30,22 +28,8 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _showPassword = false;
 
-  void moveToSignup() {
-    Get.off(
-      () => const SignUpScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
-  }
-
-  void moveToHome() {
-    Get.off(
-      () => const Wrapper(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
+  void alreadyLoggedIn() {
+    moveToHome();
     context.showSnackBar(
       message: 'Signed in',
       backgroundColor: kModelBlack,
@@ -56,27 +40,8 @@ class _SignInScreenState extends State<SignInScreen> {
     setState(() {
       _isLoading = true;
     });
-    try {
-      if (_formKey.currentState!.validate()) {
-      final loggedInUser = await database.logIn(_usernameController.text.trim(), _passwordController.text.trim());
-      if (loggedInUser != null) {
-        username = loggedInUser.username;
-        email = loggedInUser.email;
 
-        storage.write('profile', {
-          "username": username,
-          "email": email
-        });
-        moveToHome();
-      } else {
-        kDefaultDialog2("Failed", "Invalid username or password");
-      }
-      }
-    } catch (error) {
-      kDefaultDialog2("Error", "$error");
-    }
-
-    
+    logInUser(_formKey, _usernameController, _passwordController, username, email, alreadyLoggedIn);
 
     setState(() {
       _isLoading = false;
