@@ -5,11 +5,9 @@ import 'package:sqflite/sqflite.dart';
 import 'package:stress_management_app/db/users_database.dart';
 import 'package:stress_management_app/models/user.dart';
 import 'package:stress_management_app/utils/constants.dart';
+import 'package:stress_management_app/utils/navigation.dart';
 import 'package:stress_management_app/utils/validator.dart';
-import 'package:stress_management_app/utils/wrapper.dart';
 import 'package:stress_management_app/widgets/button.dart';
-import 'package:get/get.dart';
-import 'package:stress_management_app/screens/signin.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -19,24 +17,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  void moveToSignIn() {
-    Get.off(
-      () => const SignInScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
-  }
-
-  void moveToHome() {
-    Get.off(
-      () => const Wrapper(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
-  }
-
   MindDatabase database = MindDatabase.instance;
   bool _isLoading = false;
   late final TextEditingController _usernameController;
