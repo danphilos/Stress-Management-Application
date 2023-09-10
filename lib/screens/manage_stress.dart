@@ -22,8 +22,7 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
   //tflite varibles
   late File _image;
   List _output = [];
-  //List<Map<String, dynamic>> _output = [];
-  final picker = ImagePicker(); //Allows picking image from galler or camera
+  final picker = ImagePicker();
 
   @override
   void initState() {
@@ -43,28 +42,25 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
 
     setState(() {
       _output = output;
-
-      ///issues here
       _loading = false;
     });
 
-    print(output[0]['label']);
     if(output[0]['label'] == "1 Stressed"){
       Get.to(
-      () => const StressedScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeOut,
-    );
+        () => const StressedScreen(),
+        transition: Transition.cupertino,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     }
 
     if(output[0]['label'] == "0 Not stressed"){
       Get.to(
-      () => const NotStressedScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeOut,
-    );
+        () => const NotStressedScreen(),
+        transition: Transition.cupertino,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     }
   }
 
@@ -100,8 +96,7 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    //Tflite.close();
+    Tflite.close();
     super.dispose();
   }
 
@@ -143,7 +138,7 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
                     ? SizedBox(
                         child: Column(
                           children: <Widget>[
-                            ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.asset('assets/stress3.jpg')),
+                            ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.asset('assets/images/stress3.jpg')),
                           ],
                         ))
                     : SizedBox(
