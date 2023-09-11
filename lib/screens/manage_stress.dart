@@ -1,9 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:stress_management_app/screens/not_stressed.dart';
-import 'package:stress_management_app/screens/stressed_screen.dart';
 import 'package:stress_management_app/utils/constants.dart';
+import 'package:stress_management_app/utils/navigation.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -18,8 +16,7 @@ class ManageStressScreen extends StatefulWidget {
 
 class _ManageStressScreenState extends State<ManageStressScreen> {
   bool _loading = true;
-
-  //tflite varibles
+  bool isLoading = false;
   late File _image;
   List _output = [];
   final picker = ImagePicker();
@@ -43,24 +40,15 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
     setState(() {
       _output = output;
       _loading = false;
+      isLoading = false;
     });
 
     if(output[0]['label'] == "1 Stressed"){
-      Get.to(
-        () => const StressedScreen(),
-        transition: Transition.cupertino,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
+      moveToStressed();
     }
 
     if(output[0]['label'] == "0 Not stressed"){
-      Get.to(
-        () => const NotStressedScreen(),
-        transition: Transition.cupertino,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
+      moveToNotStressed();
     }
   }
 
@@ -72,6 +60,9 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
 
   //Picking image via camera
   pickCameraImage() async {
+    setState(() {
+      isLoading = true;
+    });
     var image = await picker.pickImage(source: ImageSource.camera);
     if (image == null) {
       return null;
@@ -80,10 +71,17 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
     }
 
     classifyImage(_image);
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
   //Picking Image via Gallary
   pickGalleryImage() async {
+    setState(() {
+      isLoading = true;
+    });
     var image = await picker.pickImage(source: ImageSource.gallery);
     if (image == null) {
       return null;
@@ -134,7 +132,8 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
               ),
               const SizedBox(height: 40),
               Container(
-                child: _loading
+                child: !isLoading
+                  ? _loading
                     ? SizedBox(
                         child: Column(
                           children: <Widget>[
@@ -154,7 +153,8 @@ class _ManageStressScreenState extends State<ManageStressScreen> {
                           const SizedBox(height: 10),
                         ],
                       ),
-                    ),
+                    )
+                    : preloader
               ),
               ],
             ),

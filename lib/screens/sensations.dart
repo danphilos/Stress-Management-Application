@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/screens/play_song.dart';
 import 'package:stress_management_app/utils/constants.dart';
-import 'package:stress_management_app/widgets/button.dart';
 
 
 class SensationsScreen extends StatefulWidget {
@@ -54,7 +53,7 @@ class _SensationsScreenState extends State<SensationsScreen> {
 
               const SizedBox(height: 15,),
 
-              ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.asset('assets/stress3.jpg')),
+              ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.asset('assets/images/stress3.jpg')),
 
               const SizedBox(height: 24,),
 
@@ -132,7 +131,7 @@ class _SensationsScreenState extends State<SensationsScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: kYellow,
         onPressed: () {},
-        child: const Icon(Icons.add), // Add an icon to the FAB
+        child: const Icon(Icons.add),
       ),
     );
   }

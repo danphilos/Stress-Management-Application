@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:stress_management_app/screens/about.dart';
 import 'package:stress_management_app/utils/constants.dart';
+import 'package:stress_management_app/utils/navigation.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
-
-  void moveToSignup() {
-    Get.to(
-      () => const AboutScreen(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +34,7 @@ class Settings extends StatelessWidget {
               ),
     
               InkWell(
-                onTap: moveToSignup,
+                onTap: moveToAbout,
                 child: Container(
                   padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 4),
                   decoration: BoxDecoration(
@@ -74,7 +64,7 @@ class Settings extends StatelessWidget {
                       height: 16,
                     ),
               InkWell(
-                onTap: moveToSignup,
+                onTap: moveToTheme,
                 child: Container(
                   padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 4),
                   decoration: BoxDecoration(

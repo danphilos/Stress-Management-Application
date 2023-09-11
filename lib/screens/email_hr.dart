@@ -45,7 +45,7 @@ class _EmailHRScreenState extends State<EmailHRScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: Column(
           children: [
-            Row(
+            const Row(
               children: [
                 Text(
                   'Try these solutions',
@@ -53,7 +53,7 @@ class _EmailHRScreenState extends State<EmailHRScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 32,),
+            const SizedBox(height: 32,),
 
             SizedBox(
               height: MediaQuery.of(context).size.height/3,
@@ -110,7 +110,7 @@ class _EmailHRScreenState extends State<EmailHRScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                   'Email HR',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -124,11 +124,11 @@ class _EmailHRScreenState extends State<EmailHRScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                   'Schedule',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
-                    Text(
+                    const Text(
                   'meeting',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),

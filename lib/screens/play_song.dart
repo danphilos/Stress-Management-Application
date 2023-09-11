@@ -114,7 +114,7 @@ void setAudioPosition(double value) {
                 const SizedBox(height: 12,),
                 Text(widget.name),
 
-                 // Add a slider for seeking here
+                 // Slider
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:stress_management_app/db/users_database.dart';
-import 'package:stress_management_app/models/user.dart';
 import 'package:stress_management_app/utils/constants.dart';
 import 'package:stress_management_app/utils/navigation.dart';
+import 'package:stress_management_app/utils/util_functions.dart';
 import 'package:stress_management_app/utils/validator.dart';
 import 'package:stress_management_app/widgets/button.dart';
 
@@ -35,32 +34,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       _isLoading = true;
     });
     
-    try {
-      if (_formKey.currentState!.validate()) {
-        final newUser = User(username: _usernameController.text.trim(), password: _passwordController.text.trim(), email: _emailController.text.trim());
-        final loggedInUser = await database.signUp(newUser);
+    signUpUser(_formKey, _usernameController, _passwordController, _emailController);
 
-      if (loggedInUser != null) {
-        kDefaultDialog("Successful", "Continue to Home", onYesPressed: (){
-          storage.write('profile', {
-            "username": _usernameController.text.trim(),
-            "email": _emailController.text.trim()
-          });
-          moveToHome();
-          });
-      } else {
-        kDefaultDialog2("Failed", "Something went wrong, Try again");
-      }
-      }
-    } catch (error) {
-      kDefaultDialog2("Error", "$error");
-
-      if (error is DatabaseException && error.isUniqueConstraintError()) {
-        kDefaultDialog2("Username is not unique", "Please choose another username");
-      } else {
-        kDefaultDialog2("Error", "$error");
-      }
-    }
+    setState(() {
+      _isLoading = false;
+    });
   
   }
 
@@ -216,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 const SizedBox(
                         height: 22,
                       ),
-                      CustomButton(onTap: _signUp, text: "Get Started"),
+                      CustomButton(onTap: _signUp, text: _isLoading ? "loading..." : "Get Started"),
                       const SizedBox(
                         height: 10,
                       ),

@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/screens/recommendations.dart';
-import 'package:stress_management_app/screens/settings.dart';
 import 'package:stress_management_app/utils/constants.dart';
 import 'package:stress_management_app/widgets/button.dart';
 
@@ -25,15 +24,6 @@ class _StressedScreenState extends State<StressedScreen> {
     super.dispose();
   }
 
-  void moveToSignup() {
-    Get.off(
-      () => const Settings(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,12 +36,12 @@ class _StressedScreenState extends State<StressedScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: Column(
           children: [
-            Text(
+            const Text(
               'It looks like you are stressed, could theses have caused the stress.',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
-            SizedBox(height: 32,),
-            Row(
+            const SizedBox(height: 32,),
+            const Row(
               children: [
                 Text(
                   'Tick where applicable:',

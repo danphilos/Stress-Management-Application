@@ -173,7 +173,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 const SizedBox(
                         height: 22,
                       ),
-                      CustomButton(onTap: _signIn, text: _isLoading ? "Loading" : "Sign in",),
+                      CustomButton(onTap: _signIn, text: _isLoading ? "Loading..." : "Sign in",),
                       const SizedBox(
                         height: 10,
                       ),

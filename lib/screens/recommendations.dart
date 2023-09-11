@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/screens/settings.dart';
 import 'package:stress_management_app/utils/constants.dart';
+import 'package:stress_management_app/utils/navigation.dart';
 import 'package:stress_management_app/widgets/button.dart';
 
 class RecommendationScreen extends StatefulWidget {
@@ -98,7 +99,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
             ),),
             
             const SizedBox(height: 16,),
-            Row(
+            const Row(
               children: [
                 Text("Need to talk to someone", style: TextStyle(color: Colors.white, fontSize: 20),),
               ],
@@ -110,7 +111,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                   'Email HR',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -124,11 +125,11 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                   'Schedule',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
-                    Text(
+                    const Text(
                   'meeting',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
@@ -147,7 +148,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
               ],
             ),
             const SizedBox(height: 32,),
-            CustomButton(onTap: (){}, text: "Sensations")
+            const CustomButton(onTap: moveToSensation, text: "Sensations")
           ],
         ),
       ),

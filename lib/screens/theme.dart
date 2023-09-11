@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:stress_management_app/utils/constants.dart';
 
-class AboutScreen extends StatefulWidget {
-  const AboutScreen({super.key});
+class ThemeScreen extends StatefulWidget {
+  const ThemeScreen({super.key});
 
   @override
-  _AboutScreenState createState() => _AboutScreenState();
+  _ThemeScreenState createState() => _ThemeScreenState();
 }
 
-class _AboutScreenState extends State<AboutScreen> {
+class _ThemeScreenState extends State<ThemeScreen> {
 
   @override
   void initState() {
@@ -25,7 +25,7 @@ class _AboutScreenState extends State<AboutScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About Us', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
+        title: const Text('Theme', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
         elevation: 0,
         backgroundColor: kLeadBlack,
       ),
@@ -35,12 +35,8 @@ class _AboutScreenState extends State<AboutScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'The MindSuavie mobile app is designed to provide users with a seamless experience for managing their mental well-being.',
+              "Set the app's appearance.",
               style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            Text(
-              'Version 1.0',
-              style: TextStyle(color: Color.fromARGB(172, 255, 255, 255), fontSize: 18),
             ),
           ],
         ),
