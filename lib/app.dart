@@ -10,7 +10,9 @@ class MindSuavieApp extends StatelessWidget {
   @override
   Widget build (BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: kLeadBlack),
+      const SystemUiOverlayStyle(statusBarColor: kLeadBlack,
+      systemNavigationBarColor: kLeadBlack
+      ),
     );
     return GetMaterialApp(
       title: 'MindSuavie',
@@ -20,6 +22,7 @@ class MindSuavieApp extends StatelessWidget {
         fontFamily: "NunitoSans",
         dialogBackgroundColor: kModelBlack,
         scaffoldBackgroundColor: kLeadBlack,
+        primaryColor: kLeadBlack,
         textTheme: const TextTheme(
           titleLarge: TextStyle(color: Colors.white),
           bodyMedium: TextStyle(color: Colors.white),

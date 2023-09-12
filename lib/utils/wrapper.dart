@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/screens/screens.dart';
+import 'package:stress_management_app/utils/constants.dart';
 
 class Wrapper extends StatefulWidget {
   const Wrapper({super.key});
@@ -39,6 +41,11 @@ class _WrapperState extends State<Wrapper> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: kLeadBlack,
+      systemNavigationBarColor: kModelBlack
+      ),
+    );
     return Scaffold(
       body: Obx(
         () => _pages[_selectedIndex.value],
