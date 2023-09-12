@@ -4,6 +4,7 @@ import 'package:stress_management_app/screens/about.dart';
 import 'package:stress_management_app/screens/manage_stress.dart';
 import 'package:stress_management_app/screens/meditation.dart';
 import 'package:stress_management_app/screens/not_stressed.dart';
+import 'package:stress_management_app/screens/play_song.dart';
 import 'package:stress_management_app/screens/sensations.dart';
 import 'package:stress_management_app/screens/signin.dart';
 import 'package:stress_management_app/screens/signup.dart';
@@ -107,6 +108,15 @@ void moveToStressed() {
     () => const StressedScreen(),
     transition: Transition.cupertino,
     duration: const Duration(milliseconds: 300),
+    curve: Curves.easeOut,
+  );
+}
+
+void moveToPlaySong(source, name) {
+  Get.to(
+    () => PlaySong(source: source, name: name,),
+    transition: Transition.cupertino,
+    duration: const Duration(milliseconds: 600),
     curve: Curves.easeOut,
   );
 }

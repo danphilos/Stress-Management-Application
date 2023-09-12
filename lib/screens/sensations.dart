@@ -1,8 +1,10 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:stress_management_app/screens/play_song.dart';
 import 'package:stress_management_app/utils/constants.dart';
+import 'package:stress_management_app/widgets/song_card.dart';
+import 'package:file_picker/file_picker.dart';
 
 
 class SensationsScreen extends StatefulWidget {
@@ -13,6 +15,24 @@ class SensationsScreen extends StatefulWidget {
 }
 
 class _SensationsScreenState extends State<SensationsScreen> {
+
+  List<File> audioFiles = [];
+
+  Future<void> pickAudio() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.audio,
+      allowMultiple: true,
+    );
+
+    if (result != null) {
+      List<File> pickedFiles = result.paths.map((path) => File(path!)).toList();
+
+      setState(() {
+        audioFiles.addAll(pickedFiles);
+      });
+    }
+  }
+
 
   @override
   void initState() {
@@ -32,105 +52,73 @@ class _SensationsScreenState extends State<SensationsScreen> {
         elevation: 0,
         backgroundColor: kLeadBlack,
       ),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+      body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[
-            Column(
-              children: [
-            const SizedBox(height: 24),
-
-            const Row(
-              children: [
-                Text(
-                  'Kill Anxiety, ',
-                  style: TextStyle(color: Colors.white, fontSize: 20),),
-                  Text(
-                  'Stay Calm',
-                  style: TextStyle(color: Colors.white, fontSize: 20),),
-              ],
-            ),
-
-              const SizedBox(height: 15,),
-
-              ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.asset('assets/images/stress3.jpg')),
-
-              const SizedBox(height: 24,),
-
-              const Row(
-                children: [
-                  Text(
-                  'Playlist by Immie',
-                  style: kNunitoSansSemiBold18,)
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                children: <Widget>[
+                  Column(
+                    children: [
+                  const SizedBox(height: 24),
+      
+                  const Row(
+                    children: [
+                      Text(
+                        'Kill Anxiety, ',
+                        style: TextStyle(color: Colors.white, fontSize: 20),),
+                        Text(
+                        'Stay Calm',
+                        style: TextStyle(color: Colors.white, fontSize: 20),),
+                    ],
+                  ),
+      
+                    const SizedBox(height: 15,),
+      
+                    ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.asset('assets/images/stress3.jpg')),
+      
+                    const SizedBox(height: 24,),
+      
+                    const Row(
+                      children: [
+                        Text(
+                        'Playlist by Immie',
+                        style: kNunitoSansSemiBold18,)
+                      ],
+                    ),
+      
+                    
+      
+                    const SizedBox(height: 16,),
+                    const SongCard('audio/tenderness.mp3', 'tenderness.mp3'),
+                    const SizedBox(height: 8,),
+                    const SongCard('audio/slowmotion.mp3', 'slowmotion.mp3'),
+                    const SizedBox(height: 16,),
+                    ],
+                  ),
                 ],
               ),
-
-              const SizedBox(height: 16,),
-
-              InkWell(
-                onTap: (){
-                  Get.to(
-                    () => PlaySong(source: 'audio/tenderness.mp3', name: 'tenderness.mp3',),
-                    transition: Transition.cupertino,
-                    duration: const Duration(milliseconds: 600),
-                    curve: Curves.easeOut,
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 8),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    border: Border.all(color: Colors.white30),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.play_circle, color: Colors.white,),
-                      SizedBox(width: 12,),
-                      Text(
-                      'Tenderness - Bensounds',
-                      style: TextStyle(color: Colors.white, fontSize: 20),),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8,),
-
-              InkWell(
-                onTap: (){
-                  Get.to(
-                    () => PlaySong(source: 'audio/slowmotion.mp3', name: 'slowmotion.mp3',),
-                    transition: Transition.cupertino,
-                    duration: const Duration(milliseconds: 600),
-                    curve: Curves.easeOut,
-                  );
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(bottom: 16, top: 16, left: 8, right: 8),
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    border: Border.all(color: Colors.white30),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.play_circle, color: Colors.white,),
-                      SizedBox(width: 12,),
-                      Text(
-                      'Slow Motion - Bensounds',
-                      style: TextStyle(color: Colors.white, fontSize: 20),),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 16,),
-              ],
             ),
+            // Container(
+            //   height: 400,
+            //   child: ListView.builder(
+            //             itemCount: audioFiles.length,
+            //             itemBuilder: (context, index) {
+            //               return ListTile(
+            //                 title: Text(audioFiles[index].path.split('/').last), // Display file name
+            //               );
+            //             },
+            //           ),
+            // ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: kYellow,
-        onPressed: () {},
+        onPressed: () {
+          pickAudio();
+        },
         child: const Icon(Icons.add),
       ),
     );

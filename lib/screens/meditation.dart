@@ -31,7 +31,7 @@ class _MeditationScreenState extends State<MeditationScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                   Text(
-                    'Just give yourself a moment to breath',
+                    'Discover happiness',
                     style: TextStyle(
                       color: Colors.white70,
                       fontWeight: FontWeight.normal,

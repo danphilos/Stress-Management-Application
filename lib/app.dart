@@ -23,7 +23,10 @@ class MindSuavieApp extends StatelessWidget {
         textTheme: const TextTheme(
           titleLarge: TextStyle(color: Colors.white),
           bodyMedium: TextStyle(color: Colors.white),
+          bodySmall: TextStyle(color: Colors.white),
+          bodyLarge: TextStyle(color: Colors.white),
         ),
+        unselectedWidgetColor: Colors.white70,
       ),
     );
   }

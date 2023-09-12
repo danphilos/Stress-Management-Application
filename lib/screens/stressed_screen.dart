@@ -24,6 +24,8 @@ class _StressedScreenState extends State<StressedScreen> {
     super.dispose();
   }
 
+  List<bool> _selectedColors = [false, false, false, false, false];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +39,7 @@ class _StressedScreenState extends State<StressedScreen> {
         child: Column(
           children: [
             const Text(
-              'It looks like you are stressed, could theses have caused the stress.',
+              'It looks like you are stressed, could these have caused the stress.',
               style: TextStyle(color: Colors.white, fontSize: 20),
             ),
             const SizedBox(height: 32,),
@@ -46,6 +48,60 @@ class _StressedScreenState extends State<StressedScreen> {
                 Text(
                   'Tick where applicable:',
                   style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                CheckboxListTile(
+                  title: const Text('Too much workload', style: TextStyle(color: Colors.white),),
+                  value: _selectedColors[0],
+                  checkColor: Colors.white,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedColors[0] = value!;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: const Text('Role ambiguity', style: TextStyle(color: Colors.white),),
+                  value: _selectedColors[1],
+                  checkColor: Colors.white,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedColors[1] = value!;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: const Text('Poor work life balance', style: TextStyle(color: Colors.white),),
+                  value: _selectedColors[2],
+                  checkColor: Colors.white,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedColors[2] = value!;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: const Text('Lack of Resources', style: TextStyle(color: Colors.white),),
+                  value: _selectedColors[3],
+                  checkColor: Colors.white,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedColors[3] = value!;
+                    });
+                  },
+                ),
+                CheckboxListTile(
+                  title: const Text('Job Insecurity', style: TextStyle(color: Colors.white),),
+                  value: _selectedColors[4],
+                  checkColor: Colors.white,
+                  onChanged: (value) {
+                    setState(() {
+                      _selectedColors[4] = value!;
+                    });
+                  },
                 ),
               ],
             ),

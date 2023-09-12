@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:stress_management_app/utils/constants.dart';
+import 'package:stress_management_app/utils/theme_dropdown.dart';
 
 class ThemeScreen extends StatefulWidget {
   const ThemeScreen({super.key});
@@ -32,12 +33,21 @@ class _ThemeScreenState extends State<ThemeScreen> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: const Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Set the app's appearance.",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+            Row(
+              children: [
+                Text(
+                  "Set the app's appearance.",
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ],
             ),
+            SizedBox(height: 12,),
+            Row(
+              children: [
+                ThemeDropdown(),
+              ],
+            )
           ],
         ),
       ),
