@@ -46,7 +46,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: Column(
           children: [
-            Row(
+            const Row(
               children: [
                 Text(
                   'Try these solutions',
@@ -54,7 +54,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 32,),
+            const SizedBox(height: 32,),
 
             SizedBox(
               height: MediaQuery.of(context).size.height/3,
@@ -117,7 +117,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                 ),
                 const SizedBox(height: 4,),
                     OutlineButton(onTap: (){
-                      Get.back();
+                      moveToEmail();
                     }, text: "Send"),
                   ],
                 ),
@@ -135,12 +135,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                 ),
                 const SizedBox(height: 4,),
                     OutlineButton(onTap: (){
-                      Get.to(
-                        () => const RecommendationScreen(),
-                        transition: Transition.cupertino,
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.easeOut,
-                      );
+                      moveToTherepist();
                     }, text: "Submit"),
                   ],
                 ),

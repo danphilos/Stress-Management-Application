@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:stress_management_app/screens/about.dart';
+import 'package:stress_management_app/screens/email_hr.dart';
 import 'package:stress_management_app/screens/manage_stress.dart';
 import 'package:stress_management_app/screens/meditation.dart';
 import 'package:stress_management_app/screens/not_stressed.dart';
@@ -115,6 +116,15 @@ void moveToStressed() {
 void moveToPlaySong(source, name) {
   Get.to(
     () => PlaySong(source: source, name: name,),
+    transition: Transition.cupertino,
+    duration: const Duration(milliseconds: 600),
+    curve: Curves.easeOut,
+  );
+}
+
+void moveToEmail() {
+  Get.to(
+    () => const EmailHRScreen(),
     transition: Transition.cupertino,
     duration: const Duration(milliseconds: 600),
     curve: Curves.easeOut,
