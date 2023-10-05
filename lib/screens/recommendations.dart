@@ -1,37 +1,57 @@
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:stress_management_app/screens/settings.dart';
 import 'package:stress_management_app/utils/constants.dart';
 import 'package:stress_management_app/utils/navigation.dart';
 import 'package:stress_management_app/widgets/button.dart';
 
 class RecommendationScreen extends StatefulWidget {
-  const RecommendationScreen({super.key});
+  final List<bool> causes;
+  const RecommendationScreen({super.key, required this.causes});
 
   @override
   _RecommendationScreenState createState() => _RecommendationScreenState();
 }
 
 class _RecommendationScreenState extends State<RecommendationScreen> {
+  // final List recommendations = ['1. Say no to work outside your roles', '2. Clarify your roles and expectations', '3. Go for travels, shows and  swimming during the weekend', '4. Reduce your brain'];
+
+  final List recommendations = [];
 
   @override
   void initState() {
+    print(widget.causes);
+    if(widget.causes[0] && widget.causes[1] && widget.causes[2] && widget.causes[3] && widget.causes[4]) {
+      recommendations.add('Prioritize tasks and set realistic goals.');
+      recommendations.add('Say no to work outside your roles');
+      recommendations.add('Enhance your skills through learning.');
+      recommendations.add('Communicate resource needs to your team.');
+    }
+    else {
+      if(widget.causes[0]) {
+            recommendations.add('Prioritize tasks and set realistic goals.');
+            recommendations.add('Communicate workload concerns with your manager.');
+          }
+      if(widget.causes[1]) {
+            recommendations.add('Say no to work outside your roles');
+            recommendations.add('Clarify your roles and expectations');
+          }
+      if(widget.causes[2]) {
+            recommendations.add('Go for travels, shows and  swimming during the weekend');
+            recommendations.add('Establish boundaries for work and personal life.');
+          }
+        if(widget.causes[3]) {
+            recommendations.add('Communicate resource needs to your team.');
+          }
+        if(widget.causes[4]) {
+            recommendations.add('Enhance your skills through learning.');
+          }
+    } 
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
-  }
-
-  void moveToSignup() {
-    Get.off(
-      () => const Settings(),
-      transition: Transition.cupertino,
-      duration: const Duration(milliseconds: 600),
-      curve: Curves.easeOut,
-    );
   }
 
   @override
@@ -56,47 +76,32 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
             ),
             const SizedBox(height: 32,),
 
+
             SizedBox(
-              height: MediaQuery.of(context).size.height/3,
-              child: ListView(
-              children: const [
-                Text(
-              '1. Say no to work outside your roles',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
+              height: MediaQuery.of(context).size.height / 2.5,
+              child: ListView.builder(
+                itemCount: recommendations.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          "${index+1}. ${recommendations[index]}",
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 18,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                      ),
+                      const SizedBox(height: 10,),
+                    ],
+                  );
+                },
               ),
             ),
-            SizedBox(height: 10,),
-            Text(
-              '2. Clarify your roles and expectations',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 10,),
-            Text(
-              '3. Go for travels, shows and swimming during the weekend',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
-              ),
-            ),
-            SizedBox(height: 10,),
-            Text(
-              '5. Reduce your brain',
-              style: TextStyle(
-                color: Colors.white70,
-                fontWeight: FontWeight.normal,
-                fontSize: 18,
-              ),
-            ),
-              ]
-            ),),
             
             const SizedBox(height: 16,),
             const Row(

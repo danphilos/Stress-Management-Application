@@ -6,6 +6,7 @@ import 'package:stress_management_app/screens/manage_stress.dart';
 import 'package:stress_management_app/screens/meditation.dart';
 import 'package:stress_management_app/screens/not_stressed.dart';
 import 'package:stress_management_app/screens/play_song.dart';
+import 'package:stress_management_app/screens/recommendations.dart';
 import 'package:stress_management_app/screens/sensations.dart';
 import 'package:stress_management_app/screens/signin.dart';
 import 'package:stress_management_app/screens/signup.dart';
@@ -33,10 +34,10 @@ void moveToSignIn() {
 }
 
 void moveToHome() {
-  Get.off(
+  Get.offAll(
     () => const Wrapper(),
     transition: Transition.cupertino,
-    duration: const Duration(milliseconds: 600),
+    duration: const Duration(milliseconds: 300),
     curve: Curves.easeOut,
   );
 }
@@ -125,6 +126,15 @@ void moveToPlaySong(source, name) {
 void moveToEmail() {
   Get.to(
     () => const EmailHRScreen(),
+    transition: Transition.cupertino,
+    duration: const Duration(milliseconds: 600),
+    curve: Curves.easeOut,
+  );
+}
+
+void moveToRecommendations(causes) {
+  Get.to(
+    () => RecommendationScreen(causes: causes),
     transition: Transition.cupertino,
     duration: const Duration(milliseconds: 600),
     curve: Curves.easeOut,

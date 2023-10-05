@@ -46,8 +46,16 @@ class _HomeState extends State<Home> {
                     'Are you an employee having stress at work. need someone to talk to?',
                     style: TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(
+                        child: Column(
+                          children: <Widget>[
+                            ClipRRect(borderRadius: BorderRadius.circular(10.0),child: Image.asset('assets/images/stress3.jpg')),
+                          ],
+                        ))
                 ],
               ),
+
+              
 
               SizedBox(
                   width: MediaQuery.of(context).size.width,
